@@ -59,12 +59,22 @@ I grabbed random images from each of the two classes and displayed them to get a
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
 ![alt text][image2]
 
 #### 2. How I settled on my final choice of HOG parameters.
 
-I tried various combinations of parameters, at first I combined all three features together to one vectore, use a 
+I tried various combinations of parameters, at first I combined all three features together to one vectore, use the `StandardScaler()` to scale all features with different value ranges to unified scale. Then experiment with different parameters such like:
+
+```python
+colorspace = 'YUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+orient = 11
+pix_per_cell = 16
+cell_per_block = 2
+hog_channel = 'ALL'
+spatial_size=(16,16)
+hist_bins=32
+hist_range=(0,256)
+```
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
