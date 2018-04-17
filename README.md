@@ -49,7 +49,7 @@ Using gradient you can get the directions of pixels, such like this:
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). `orientations` means how many orientations you want to specify when apply HOG detecting, and then the algorithm will count the gradient magnitude of each orientations:
 
-![alt text][image9]
+![alt text][image9]{font-size:0.75em;}
 
 I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
