@@ -39,7 +39,7 @@ You're reading it!
 
 The code for this step is contained in the function `get_hog_features` of the extract_features.py  
 
-I started by reading in all the `vehicle` and `non-vehicle` images.  This images are from [GTI vehicle image database](http://www.gti.ssr.upm.es/data/Vehicle_database.html) and [KITTI vision benchmark suite](http://www.cvlibs.net/datasets/kitti/). Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+I started by reading in all the `vehicle` and `non-vehicle` images.  This images are from [GTI vehicle image database](http://www.gti.ssr.upm.e`s/data/Vehicle_database.html) and [KITTI vision benchmark suite](http://www.cvlibs.net/datasets/kitti/). Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 
@@ -63,7 +63,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 #### 2. How I settled on my final choice of HOG parameters.
 
-I tried various combinations of parameters, at first I combined all three features together to one vectore, use the `StandardScaler()` to scale all features with different value ranges to unified scale. Then experiment with different parameters such like:
+I tried various combinations of parameters, at first I combined all three features together to one vector, use the `StandardScaler()` to scale all features with different value ranges to a unified scale. Then experiment with different parameters such like:
 
 ```python
 colorspace = 'YUV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
@@ -76,9 +76,14 @@ hist_bins=32
 hist_range=(0,256)
 ```
 
-#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+I have tried with a lot of different combinations of parameters, I found that `colorspace` values a lot for vehicle detection, so you should choos a really appropriate colorspace; The `pix_per_cell`, `spatial_size` and `hist_bins` normally influence the processing speed, but have lower influence on the final detection results. So the most important thing is your classifier and the HOG features, after many many experiments and references, I decide only to use HOG features to train my classifier, because it's stable and much faster. 
 
-I trained a linear SVM using...
+#### 3. Describe how (and identify where in my codes) to train a classifier using the selected HOG features (and color features if you used them).
+
+I trained a linear SVM using HOG features, cause there is only one kind of feature, you don't need to add a scaler first. At first I split the data into training (80%) and test sets (20%). Then I use `grid_search.GridSearchCV` to search for the best parameter combination of SVM, I tried with following combinations:
+
+| s| s|
+|s |s |
 
 ### Sliding Window Search
 
