@@ -62,9 +62,9 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ![alt text][image2]
 
-#### 2. Explain how you settled on your final choice of HOG parameters.
+#### 2. How I settled on my final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters, at first I combined all three features together to one vectore, use a 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
