@@ -82,8 +82,10 @@ I have tried with a lot of different combinations of parameters, I found that `c
 
 I trained a linear SVM using HOG features, cause there is only one kind of feature, you don't need to add a scaler first. At first I split the data into training (80%) and test sets (20%). Then I use `grid_search.GridSearchCV` to search for the best parameter combination of SVM, I tried with following combinations:
 
-| s| s|
-|s |s |
+|      ('rbf', C=1)    		|     	  ('rbf', C=10)      					| 
+|('linear', C=1)|('linear', C=10)| 
+
+And `('linear', C=1)` has the best results, so I choose this to train a linear SVM with probability.
 
 ### Sliding Window Search
 
