@@ -23,7 +23,7 @@ The goals / steps of this project are the following:
 [image7]: ./examples/output_bboxes.png
 [image8]: ./examples/gradient_features.jpg
 [image9]: ./examples/gradient_histo.jpg
-[image9]: ./examples/hog-visualization.jpg
+[image10]: ./examples/hog-visualization.jpg
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -43,7 +43,13 @@ I started by reading in all the `vehicle` and `non-vehicle` images.  This images
 
 ![alt text][image1]
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). `orientations` means how many orientations you want to specify when apply HOG detecting, 
+Using gradient you can get the directions of pixels, such like this:
+
+![alt text][image8]
+
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). `orientations` means how many orientations you want to specify when apply HOG detecting, and then the algorithm will count the gradient magnitude of each orientations:
+
+![alt text][image9]
 
 I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
