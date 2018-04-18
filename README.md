@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 [image1]: ./examples/car_not_car.png
 [image2]: ./examples/HOG_example.jpg
 [image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
+[image4]: ./examples/test_imgs.png
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
@@ -126,11 +126,13 @@ Ultimately I searched on 4 scales, each scale includes 2 kind of searching areas
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+#### 1. The final output videos:
+
+Here's a [link to my video result](./test_videos_output/output_project_video.mp4)
+There are no detected false-positives and all cars are be deteced and tracked all the time.
 
 
-#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in my code) I implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
@@ -146,13 +148,15 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
 
-
+The detection and tracking will be much stable if you use every 15 frames' results to detemine the car position at every frame, here I use the `collections.deque(maxlen=15)` to deal with that mind: you save the heatmap of every 15 frames, you sum them up, you set a threshold to filter the false-positive area, because f-p won't be deteced in every frame (otherwise your classifier is really bad, man), so after thresholding the only in single frames detected f-p will be filtered; The other way to avoid f-p area is to set a probability-threshold for SVM, that means only the by SVM deteced areas which have the probability-scores more than fixed number will be judged as cars finally. 
 
 ---
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues I faced in my implementation of this project.  Where will my pipeline likely fail?  What could I do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+
+At first I use HOG to extract features from cars- and non-cars dataset, use the extracted features to train a SVM, then use slide window to search for small blocks from video frames, at the same time use the trained SVM to make classification: whether this block belongs to car or non-car. At the beginning I tried a lot of combinations of features, but all failed, no matter which kind of combinations I choose, I can't get the good results without false-positives, that's really trick, and finally I determined that my classifier has some problems, and it's because the extracted features can't reflect the differences between cars and non-cars, and the problem is, for HOG searching, I used L2 as the block normalization, then I use L1 as the block normalization, I get a good performed SVM, and good results. For the future I plan to try with different vedios to see if my pipeline can work on different environments.
 
