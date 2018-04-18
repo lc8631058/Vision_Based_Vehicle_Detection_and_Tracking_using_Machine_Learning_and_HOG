@@ -109,16 +109,17 @@ A fixed size of window won't lead to a comprehensive searching, cause the cars w
 
 ![alt text][image3]
 
-So after experiments, the final determined searching area are:
+So after experiments, the final determined searching area are, for more details please refer to `show_detect_area` function:
 
 ![alt text][image11]
 ![alt text][image12]
 ![alt text][image13]
 ![alt text][image14]
 
+
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on 4 scales, each scale includes 2 kind of searching areas, and using YUV 3-channel HOG features in the feature vector, which provided a nice result.  Here are some test results on test images:
 
 ![alt text][image4]
 ---
