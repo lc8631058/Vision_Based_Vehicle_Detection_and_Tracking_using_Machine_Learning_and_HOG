@@ -24,6 +24,10 @@ The goals / steps of this project are the following:
 [image8]: ./examples/gradient_features.jpg
 [image9]: ./examples/gradient_histo.jpg
 [image10]: ./examples/hog-visualization.jpg
+[image11]: ./examples/Unknown.png
+[image12]: ./examples/Unknown-2.png
+[image13]: ./examples/Unknown-3.png
+[image14]: ./examples/Unknown-4.png
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -76,7 +80,15 @@ hist_bins=32
 hist_range=(0,256)
 ```
 
-I have tried with a lot of different combinations of parameters, I found that `colorspace` values a lot for vehicle detection, so you should choos a really appropriate colorspace; The `pix_per_cell`, `spatial_size` and `hist_bins` normally influence the processing speed, but have lower influence on the final detection results. So the most important thing is your classifier and the HOG features, after many many experiments and references, I decide only to use HOG features to train my classifier, because it's stable and much faster. 
+I have tried with a lot of different combinations of parameters, I found that `colorspace` values a lot for vehicle detection, so you should choos a really appropriate colorspace; The `pix_per_cell`, `spatial_size` and `hist_bins` normally influence the processing speed, but have lower influence on the final detection results. So the most important thing is your classifier and the HOG features, after many many experiments and references, I decide only to use HOG features to train my classifier, because it's stable and much faster. So my final parameters are:
+
+```python
+colorspace = 'YUV'
+orient = 11
+pix_per_cell = 16
+cell_per_block = 2
+hog_channel = 'ALL'
+```
 
 #### 3. Describe how (and identify where in my codes) to train a classifier using the selected HOG features (and color features if you used them).
 
@@ -85,15 +97,24 @@ I trained a linear SVM using HOG features, cause there is only one kind of featu
 |      ('rbf', C=1)    		|     	  ('rbf', C=10)      					| 
 |('linear', C=1)|('linear', C=10)| 
 
-And `('linear', C=1)` has the best results, so I choose this to train a linear SVM with probability.
+And `('linear', C=1)` has the best results, so I choose this to train a linear SVM with probability. You can refer that from the cells with title "Train the SVM".
 
 ### Sliding Window Search
 
-#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how to implement a sliding window search.  How did I decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+The `find_cars` function in extract_features.py describe how I implement sliding window to search for cars. First you should determine the ROI (Region of Interest), winthin ROI, implement the slide window search with window size 64x64 from left to right, top to down, block by block to search for cars. 
+
+A fixed size of window won't lead to a comprehensive searching, cause the cars which are far away from you are smaller than the cars near by you, so to set a `scale` parameter to control the searching window size, if scale bigger than 1, the searching window will become bigger, smaller than one, window becomes smaller, such like what showed in following image:
 
 ![alt text][image3]
+
+So after experiments, the final determined searching area are:
+
+![alt text][image11]
+![alt text][image12]
+![alt text][image13]
+![alt text][image14]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
