@@ -6,7 +6,7 @@
 
 The goals / steps of this project are the following:
 
-* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
+* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a Linear SVM classifier
 * Optionally, apply a color transform and append binned color features, as well as histograms of color, to the HOG feature vector, to compare which kind of combination could lead to the best result
 * Note: for those first two steps don't forget to normalize the features and randomize a selection for training and testing.
 * Implement a sliding-window technique and use the trained classifier to search for vehicles in images.
